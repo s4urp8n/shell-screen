@@ -5,7 +5,7 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
 
     use \Zver\Package\Helper;
 
-    public static function completeTest()
+    public static function testComplete()
     {
         /**
          * initially empty
