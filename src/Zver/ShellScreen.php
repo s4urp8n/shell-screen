@@ -68,7 +68,7 @@ namespace Zver {
                 $line = StringHelper::load($line)->trimSpaces();
 
                 if ($line->isPregMatch('#^\d+\.\w+ \(\w+\)$#i')) {
-                    $list[] = $line->getFirstPart(' ');
+                    $list[] = $line->setFirstPart(' ')->getLastPart('.');
                 }
             }
 
