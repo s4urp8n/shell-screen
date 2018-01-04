@@ -64,12 +64,15 @@ namespace Zver {
             @exec('screen -ls', $output, $exitcode);
 
             foreach ($output as $line) {
+
                 $line = StringHelper::load($line)->trimSpaces();
 
                 if ($line->isPregMatch('#^\d+\.\w+ \(\w+\)$#i')) {
-                    $list[] = $line->get();
+                    $list[] = $line->getFirstPart(' ');
                 }
             }
+
+            sort($list);
 
             return $list;
         }
