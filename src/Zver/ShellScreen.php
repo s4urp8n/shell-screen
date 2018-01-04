@@ -58,9 +58,12 @@ namespace Zver {
             static::checkInstalled();
 
             $list = [];
-            $lines = Common::executeInSystem('screen -ls');
 
-            print_r($lines);
+            $output = $exitcode = '';
+
+            @exec('screen -ls', $output, $exitcode);
+
+            print_r($output);
 
             return $list;
         }
