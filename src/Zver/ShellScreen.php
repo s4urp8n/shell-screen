@@ -9,6 +9,14 @@ namespace Zver {
         public static function isScreenInstalled()
         {
 
+            $output = $exitcode = '';
+
+            @exec('screen -v 2>&1', $output, $exitcode);
+
+            $output = StringHelper::load($output);
+
+            return $output->isPregMatch('#screen\s+version#i');
+
         }
 
         public static function run($name, $command)
