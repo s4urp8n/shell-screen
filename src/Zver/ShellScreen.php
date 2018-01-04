@@ -21,8 +21,13 @@ namespace Zver {
 
         public static function run($name, $command)
         {
+            static::checkInstalled();
 
             $format = 'screen -dmS "%s" bash -c \'%s\'';
+
+            if (is_array($command)) {
+                $command = implode(';', $command);
+            }
 
             $cmd = sprintf($format, $name, $command);
 
@@ -31,6 +36,7 @@ namespace Zver {
 
         public static function quit($name)
         {
+            static::checkInstalled();
 
             $format = 'screen -X -S "%s" quit';
 
@@ -39,9 +45,24 @@ namespace Zver {
             shell_exec($cmd);
         }
 
+        protected static function checkInstalled()
+        {
+            if (!static::isScreenInstalled()) {
+                throw new \Exception('Screen command is not available');
+            }
+        }
+
         public static function getList()
         {
 
+            static::checkInstalled();
+
+            $list = [];
+            $lines = Common::executeInSystem('screen -ls');
+
+            print_r($lines);
+
+            return $list;
         }
 
     }
