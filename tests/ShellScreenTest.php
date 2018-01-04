@@ -35,39 +35,54 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
         /**
          * run first screen
          */
-        ShellScreen::run('testtest1', 'sleep 20');
+        ShellScreen::run('testtest1', 'sleep 3');
         $this->assertSame(['testtest1'], $getActualScreens());
 
         /**
          * run second screen
          */
-        ShellScreen::run('testtest2', 'sleep 30');
+        ShellScreen::run('testtest2', 'sleep 3');
         $this->assertSame([
             'testtest1',
             'testtest2'
         ], $getActualScreens());
 
         /**
+         * run second screen
+         */
+        ShellScreen::run('testtest3', 'sleep 100');
+        $this->assertSame([
+            'testtest1',
+            'testtest2',
+            'testtest3',
+        ], $getActualScreens());
+
+
+        /**
          * sleep to check that screens is still working
          */
-//        sleep(8);
-//
-//        $this->assertSame([
-//            'testtest1',
-//            'testtest2'
-//        ], $getActualScreens());
-//
-//        /**
-//         * quit runned screens
-//         */
-//
-//        ShellScreen::quit('testtest1');
-//        ShellScreen::quit('testtest2');
-//
-//        /**
-//         * must be empty list
-//         */
-//        $this->assertSame([], $getActualScreens());
+        sleep(5);
+
+        $this->assertSame([
+            'testtest3'
+        ], $getActualScreens());
+
+        sleep(5);
+
+        $this->assertSame([
+            'testtest3'
+        ], $getActualScreens());
+
+        /**
+         * quit runned screens
+         */
+
+        ShellScreen::quit('testtes3');
+
+        /**
+         * must be empty list
+         */
+        $this->assertSame([], $getActualScreens());
 
     }
 
