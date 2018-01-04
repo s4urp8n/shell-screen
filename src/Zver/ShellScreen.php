@@ -82,7 +82,9 @@ namespace Zver {
                 }
             }
 
-            sort($list);
+            if (!empty($list)) {
+                sort($list);
+            }
 
             return $list;
         }
