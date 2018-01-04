@@ -1,5 +1,7 @@
 <?php
 
+use Zver\ShellScreen;
+
 class ShellScreenTest extends PHPUnit\Framework\TestCase
 {
 
@@ -7,25 +9,43 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
 
     public function testComplete()
     {
+
+        $alreadyExistedScreens = ShellScreen::getList();
+
+        $getActualScreens = function () use ($alreadyExistedScreens) {
+
+            $list = ShellScreen::getList();
+
+            foreach ($list as $key => $value) {
+                if (in_array($value, $alreadyExistedScreens)) {
+                    unset($list[$key]);
+                }
+            }
+
+            return array_values($list);
+
+        };
+
+
         /**
          * initially empty
          */
-        $this->assertSame([], \Zver\ShellScreen::getList());
+        $this->assertSame([], $getActualScreens());
 
         /**
          * run first screen
          */
-        \Zver\ShellScreen::run('testtest1', 'sleep 3');
-        $this->assertSame(['testtest1'], \Zver\ShellScreen::getList());
+        ShellScreen::run('testtest1', 'sleep 3');
+        $this->assertSame(['testtest1'], $getActualScreens());
 
         /**
          * run second screen
          */
-        \Zver\ShellScreen::run('testtest2', 'sleep 3');
+        ShellScreen::run('testtest2', 'sleep 3');
         $this->assertSame([
             'testtest1',
             'testtest2'
-        ], \Zver\ShellScreen::getList());
+        ], $getActualScreens());
 
         /**
          * sleep to check that screens is still working
@@ -35,19 +55,19 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
         $this->assertSame([
             'testtest1',
             'testtest2'
-        ], \Zver\ShellScreen::getList());
+        ], $getActualScreens());
 
         /**
          * quit runned screens
          */
 
-        \Zver\ShellScreen::quit('testtest1');
-        \Zver\ShellScreen::quit('testtest2');
+        ShellScreen::quit('testtest1');
+        ShellScreen::quit('testtest2');
 
         /**
          * must be empty list
          */
-        $this->assertSame([], \Zver\ShellScreen::getList());
+        $this->assertSame([], $getActualScreens());
 
     }
 
