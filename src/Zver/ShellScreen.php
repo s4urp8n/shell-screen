@@ -63,7 +63,13 @@ namespace Zver {
 
             @exec('screen -ls', $output, $exitcode);
 
-            print_r($output);
+            foreach ($output as $line) {
+                $line = StringHelper::load($line)->trimSpaces();
+
+                if ($line->isPregMatch('#^\d+\.\w+ \(\w+\)$#i')) {
+                    $list[] = $line->get();
+                }
+            }
 
             return $list;
         }
