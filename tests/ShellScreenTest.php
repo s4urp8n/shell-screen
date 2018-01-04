@@ -61,6 +61,9 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
             'testtest3',
         ], $getActualScreens());
 
+        $this->assertTrue(ShellScreen::isScreenExists('testtest1'));
+        $this->assertTrue(ShellScreen::isScreenExists('testtest2'));
+        $this->assertTrue(ShellScreen::isScreenExists('testtest3'));
 
         /**
          * sleep to check that screens is still working
@@ -77,6 +80,8 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
             'testtest3'
         ], $getActualScreens());
 
+        $this->assertTrue(ShellScreen::isScreenExists('testtest3'));
+
         /**
          * quit runned screens
          */
@@ -87,6 +92,10 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
          * must be empty list
          */
         $this->assertSame([], $getActualScreens());
+
+        $this->assertFalse(ShellScreen::isScreenExists('testtest1'));
+        $this->assertFalse(ShellScreen::isScreenExists('testtest2'));
+        $this->assertFalse(ShellScreen::isScreenExists('testtest3'));
 
     }
 
