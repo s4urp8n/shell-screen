@@ -50,24 +50,24 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
         /**
          * sleep to check that screens is still working
          */
-        sleep(8);
-
-        $this->assertSame([
-            'testtest1',
-            'testtest2'
-        ], $getActualScreens());
-
-        /**
-         * quit runned screens
-         */
-
-        ShellScreen::quit('testtest1');
-        ShellScreen::quit('testtest2');
-
-        /**
-         * must be empty list
-         */
-        $this->assertSame([], $getActualScreens());
+//        sleep(8);
+//
+//        $this->assertSame([
+//            'testtest1',
+//            'testtest2'
+//        ], $getActualScreens());
+//
+//        /**
+//         * quit runned screens
+//         */
+//
+//        ShellScreen::quit('testtest1');
+//        ShellScreen::quit('testtest2');
+//
+//        /**
+//         * must be empty list
+//         */
+//        $this->assertSame([], $getActualScreens());
 
     }
 
