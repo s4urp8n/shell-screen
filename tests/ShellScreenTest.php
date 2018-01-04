@@ -35,13 +35,13 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
         /**
          * run first screen
          */
-        ShellScreen::run('testtest1', 'sleep 3');
+        ShellScreen::run('testtest1', 'sleep 20');
         $this->assertSame(['testtest1'], $getActualScreens());
 
         /**
          * run second screen
          */
-        ShellScreen::run('testtest2', 'sleep 3');
+        ShellScreen::run('testtest2', 'sleep 30');
         $this->assertSame([
             'testtest1',
             'testtest2'
