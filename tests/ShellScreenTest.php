@@ -26,6 +26,10 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
 
         };
 
+        ShellScreen::quit('testtest1');
+        ShellScreen::quit('testtest2');
+        ShellScreen::quit('testtest3');
+
 
         /**
          * initially empty
@@ -77,7 +81,7 @@ class ShellScreenTest extends PHPUnit\Framework\TestCase
          * quit runned screens
          */
 
-        ShellScreen::quit('testtes3');
+        ShellScreen::quit('testtest3');
 
         /**
          * must be empty list
