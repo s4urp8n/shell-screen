@@ -23,6 +23,10 @@ namespace Zver {
         {
             static::checkInstalled();
 
+            if (static::isScreenExists($name)) {
+                throw new \Exception("Screen with name " . $name . ' already exists');
+            }
+
             $format = 'screen -dmS "%s" bash -c \'%s\'';
 
             if (is_array($command)) {
